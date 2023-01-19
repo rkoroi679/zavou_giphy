@@ -31,20 +31,34 @@
 		    var value 	= $('#search-item-txt').val();
 		     $.ajax({
 		        url: './utils/ajax_connect.php',
-		        dataType: "json",
+		        dataType: "jsonp",
 		        data: {
 		            action      : action,
 		            value       : value           
 		        },
-		        success: function(data)
+		        success: function(result)
 		        {          
-		            console.log(data);
-		            alert("Thank you for your feedback.");
-		            
+		        	console.log(result);
+		        	result = JSON.stringify(result);
+		          	$('.giphy-output').html('');
+		          	
+					for (var i = 0; i <= result['output'].length; i++) {
+						var item = result['output'][i];
+						console.log(item);
+						var htmlGliphy = `<div class="col-md-3">
+											<h3>`+ item[1] +`</h3>
+											<img class="image" src="`+ item[0] +`">
+										</div>`;
+					    $('.giphy-output').append(htmlGliphy);
+					}
 		        }
 		    });
 
 		});
+
+		function create_data_from_output(result) {
+			
+		}
 	</script>
 </body>
 </html>

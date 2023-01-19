@@ -10,6 +10,8 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action']) )
 		case 'read_glipyhs_by_search_item':
 			$search_item 	= $_REQUEST['value'];
 			$all_gliphys 	= create_search_api($search_item);
+			header('Access-Control-Allow-Origin: *');
+			header('Content-Type: application/json');
 			echo json_encode(array("output" => $all_gliphys));
 		break;
 		default:
